@@ -1,0 +1,6 @@
+env/
+__pycache__/
+db.sglite3
+*.pyc
+*.pyo
+*.log
