@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<h1>Добро пожаловать в систему бронирования!</h1>
+<p>Выберите нужный раздел:</p>
+<a href="{% url 'user-list' %}" class="btn btn-primary">Пользователи</a>
+<a href="{% url 'table-list' %}" class="btn btn-secondary">Столики</a>
+<a href="{% url 'reservation-list' %}" class="btn btn-success">Бронирования</a>
+{% endblock %}

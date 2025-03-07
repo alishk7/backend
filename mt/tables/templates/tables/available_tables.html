@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Доступные столики{% endblock %}
+{% block content %}
+<h1>Доступные столики</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Места</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for table in tables %}
+        <tr>
+            <td>{{ table.number }}</td>
+            <td>{{ table.seats }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

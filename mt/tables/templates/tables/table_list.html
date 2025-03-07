@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Столики{% endblock %}
+{% block content %}
+<h1>Список столиков</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Номер</th>
+            <th>Места</th>
+            <th>Доступность</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for table in tables %}
+        <tr>
+            <td>{{ table.number }}</td>
+            <td>{{ table.seats }}</td>
+            <td>{% if table.is_available %}✅ Доступен{% else %}❌ Занят{% endif %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

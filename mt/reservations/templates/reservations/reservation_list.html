@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Бронирования{% endblock %}
+{% block content %}
+<h1>Список бронирований</h1>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Пользователь</th>
+            <th>Стол</th>
+            <th>Дата</th>
+            <th>Статус</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.user.username }}</td>
+            <td>{{ reservation.table.number }}</td>
+            <td>{{ reservation.date }}</td>
+            <td>{{ reservation.status }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'create-reservation' %}" class="btn btn-success">Создать бронирование</a>
+{% endblock %}
