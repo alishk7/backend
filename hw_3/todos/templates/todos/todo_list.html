@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .todo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .todo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 5px 0;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+        }
+        .todo span {
+            flex: 1;
+            text-align: left;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .status {
+            font-size: 20px;
+        }
+        .delete-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .delete-btn:hover {
+            background: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h1>📝 Список дел</h1>
+    <div class="todo-container">
+        {% for todo in todos %}
+            <div class="todo">
+                <span class="{% if todo.status %}completed{% endif %}">
+                    {{ todo.title }} (до {{ todo.due_date }}) 
+                </span>
+                <span class="status">
+                    {% if todo.status %} ✅ {% else %} ❌ {% endif %}
+                </span>
+                <a href="/todos/{{ todo.id }}/delete/">
+                    <button class="delete-btn">Удалить</button>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
