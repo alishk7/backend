@@ -1,0 +1,33 @@
+{% extends "todos/base.html" %}
+
+{% block title %}To-Do Lists{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="text-center my-4">📋 Your To-Do Lists</h2>
+
+        <!-- Кнопка для добавления нового списка -->
+        <div class="text-center mb-3">
+            <a href="/todo-lists/create/" class="btn btn-success">➕ Create New List</a>
+        </div>
+
+        <!-- Отображение списков задач -->
+        <div class="row">
+            {% for todo_list in todo_lists %}
+                <div class="col-md-6">
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ todo_list.title }}</h5>
+                            <p class="card-text">{{ todo_list.description }}</p>
+                            <a href="/todo-lists/{{ todo_list.id }}/" class="btn btn-primary">📂 View</a>
+                            <a href="/todo-lists/{{ todo_list.id }}/edit/" class="btn btn-warning">✏️ Edit</a>
+                            <a href="/todo-lists/{{ todo_list.id }}/delete/" class="btn btn-danger">🗑 Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-center">❌ No lists found. Start by creating one!</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

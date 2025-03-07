@@ -1,0 +1,64 @@
+{% extends "todos/base.html" %}
+
+{% block title %}{{ todo_list.title }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2 class="text-primary">📂 {{ todo_list.title }}</h2>
+        <p class="text-muted">{{ todo_list.description }}</p>
+
+        <hr>
+
+        <h4>📝 Tasks:</h4>
+        {% if todos %}
+            <div class="list-group">
+                {% for todo in todos %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1">{{ todo.title }}</h5>
+                        <p class="mb-1">{{ todo.description }}</p>
+                        <small class="text-muted">📅 Due: {{ todo.due_date }}</small>
+                        <br>
+                        <span class="badge {% if todo.status %}bg-success{% else %}bg-warning{% endif %}">
+                            {% if todo.status %}✅ Completed{% else %}⏳ Pending{% endif %}
+                        </span>
+                        <br><br>
+                        <a href="/todos/{{ todo.id }}/edit/" class="btn btn-warning">✏️ Edit</a>
+                        <a href="/todos/{{ todo.id }}/delete/" class="btn btn-danger">🗑 Delete</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">No tasks yet. Add one below! 👇</p>
+        {% endif %}
+
+        <hr>
+
+        <h4>➕ Add a Task:</h4>
+        <form method="post" action="/todo-lists/{{ todo_list.id }}/create_todo/" class="mt-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label class="form-label">Title</label>
+                <input type="text" name="title" class="form-control" placeholder="Enter title" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea name="description" class="form-control" rows="3" placeholder="Task details" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Due Date</label>
+                <input type="date" name="due_date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select name="status" class="form-control">
+                    <option value="False">⏳ Pending</option>
+                    <option value="True">✅ Completed</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success">Add Task</button>
+        </form>
+
+        <hr>
+        <a href="/todo-lists/" class="btn btn-secondary mt-3">🔙 Back to Lists</a>
+    </div>
+{% endblock %}
